@@ -38,7 +38,7 @@ public class SimpleArrayList<T> implements List<T> {
     public T remove(int index) {
         var item = get(index);
         System.arraycopy(container, index + 1, container, index, size - 1 - index);
-        container[container.length - 1] = null;
+        container[size - 1] = null;
         size--;
         modCount++;
         return item;

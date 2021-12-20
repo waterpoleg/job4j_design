@@ -22,8 +22,8 @@ public class Config {
             while ((line = in.readLine()) != null) {
                 if (!line.startsWith("#") && line.contains("=")) {
                     String[] conf = line.split("=");
-                    if (conf.length != 2) {
-                        throw new IllegalArgumentException();
+                    if (conf.length != 2 || conf[0].trim().isEmpty()) {
+                        throw new IllegalArgumentException("Wrong Argument");
                     }
                     values.put(conf[0], conf[1]);
                 }

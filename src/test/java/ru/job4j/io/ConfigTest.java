@@ -31,4 +31,11 @@ public class ConfigTest {
         config.load();
         assertThat(config.value("hibernate.connection.url"), is(nullValue()));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenIllegalConfigWithLeadingSpaces() {
+        String path = "src/main/java/ru/job4j/io/data/app_illegal_conf_2.properties";
+        Config config = new Config(path);
+        config.load();
+    }
 }

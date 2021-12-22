@@ -24,9 +24,7 @@ public class Analysis {
 
     public static void main(String[] args) {
         Analysis analysis = new Analysis();
-        analysis.unavailable("src/main/java/ru/job4j/io/server.log",
-                "src/main/java/ru/job4j/io/target.log");
-        analysis.unavailable("src/main/java/ru/job4j/io/server_2.log",
-                "src/main/java/ru/job4j/io/target_2.log");
+        analysis.unavailable("./data/server.log", "./data/target.log");
+        analysis.unavailable("./data/server_2.log", "./data/target_2.log");
     }
 }

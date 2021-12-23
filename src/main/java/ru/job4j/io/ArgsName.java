@@ -7,6 +7,10 @@ public class ArgsName {
 
     private final Map<String, String> values = new HashMap<>();
 
+    private boolean isValid(String data) {
+        return data.startsWith("-") && data.contains("=");
+    }
+
     public String get(String key) {
         return values.get(key);
     }
@@ -16,6 +20,9 @@ public class ArgsName {
             throw new IllegalArgumentException("No arguments.");
         }
         for (var line : args) {
+            if (!isValid(line)) {
+                throw new IllegalArgumentException("Wrong arguments pattern: -key=value.");
+            }
             var arguments = line.split("=");
             if (arguments.length < 2) {
                 throw new IllegalArgumentException("Wrong number of arguments.");
@@ -31,10 +38,10 @@ public class ArgsName {
     }
 
     public static void main(String[] args) {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
+        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512", "-encoding=UTF-8"});
         System.out.println(jvm.get("Xmx"));
 
-        ArgsName zip = ArgsName.of(new String[] {"-out=project.zip", "-encoding=UTF-8"});
+        ArgsName zip = ArgsName.of(new String[]{"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
     }
 }

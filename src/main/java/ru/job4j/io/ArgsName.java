@@ -8,7 +8,7 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     private boolean isValid(String data) {
-        return data.startsWith("-") && data.contains("=");
+        return data.startsWith("-") && data.contains("=") && !(data.startsWith("-=") || data.endsWith("="));
     }
 
     public String get(String key) {

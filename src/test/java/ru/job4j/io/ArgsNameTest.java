@@ -39,4 +39,14 @@ public class ArgsNameTest {
     public void whenWrongLastArgument() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "Xmx=1024"});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenWrongStart() {
+        ArgsName jvm = ArgsName.of(new String[] {"-=UTF-8", "Xmx=1024"});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenWrongLast() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=", "Xmx=1024"});
+    }
 }

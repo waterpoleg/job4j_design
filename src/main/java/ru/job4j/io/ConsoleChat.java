@@ -36,6 +36,7 @@ public class ConsoleChat {
                     break;
                 case STOP:
                     isKeepTalking = false;
+                    break;
                 case CONTINUE:
                     isKeepTalking = true;
                 default:

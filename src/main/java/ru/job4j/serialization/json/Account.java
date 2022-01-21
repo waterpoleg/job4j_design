@@ -17,6 +17,26 @@ public class Account {
         this.isActive = isActive;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String[] getOptions() {
+        return options;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
     @Override
     public String toString() {
         return "Account{"

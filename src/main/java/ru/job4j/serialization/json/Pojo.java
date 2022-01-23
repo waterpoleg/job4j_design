@@ -6,6 +6,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Проблема: если в Account есть геттер isActive(), то в выводе получим свойство как просто active,
+ * объяснение:
+ * В классе Account getter для isActive переименуйте в getIsActive(). (Is - с большой буквы).
+ * Это тонкости работы библиотеки.
+ * Она читает геттеры у объекта убирает префиксы get и is(оба с маленькой буквы) у названия
+ * методов и называет свойство тем словом, которое получилось.
+ *
+ *  Интересное наблюдение: если назвать метод getisActive() , где is - c маленькой буквы.
+ *  То парсер вообще пропускает такой геттер и на выходе это свойство не печатается.
+ * */
+
 public class Pojo {
     public static void main(String[] args) {
         JSONObject jsonUser = new JSONObject("{\"name\":\"Martin\",\"age\":50}");

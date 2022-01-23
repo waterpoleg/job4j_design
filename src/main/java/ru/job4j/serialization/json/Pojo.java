@@ -26,7 +26,7 @@ public class Pojo {
         jsonObject.put("description", account.getDescription());
         jsonObject.put("user", jsonUser);
         jsonObject.put("options", jsonOptions);
-        jsonObject.put("isActive", account.isActive());
+        jsonObject.put("isActive", account.getIsActive());
 
         System.out.println(jsonObject.toString());
         System.out.println(new JSONObject(account).toString());

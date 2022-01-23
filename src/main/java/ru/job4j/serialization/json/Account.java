@@ -33,7 +33,7 @@ public class Account {
         return options;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 

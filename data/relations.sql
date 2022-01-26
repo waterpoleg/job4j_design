@@ -1,19 +1,20 @@
-create table exam(
+create table booking(
     id serial primary key,
-    topic varchar(255)
+    details varchar(255)
 );
 
-create table students(
+create table customer(
     id serial primary key,
     name varchar(255),
-    topic_id int
+    booking_id int
 );
 
-insert into exam(topic) values ('math');
-insert into students(name, topic_id) values ('martin', 1);
+insert into booking(details) values ('room');
+insert into customer(name, booking_id) values ('martin', 1);
 
-select * from students
-select * from exam
+select * from booking
+select * from customer
+
 
 
 

@@ -1,19 +1,20 @@
-create table booking(
-    id serial primary key,
-    details varchar(255)
-);
-
 create table customer(
     id serial primary key,
-    name varchar(255),
-    booking_id int
+    name varchar(255)
 );
 
-insert into booking(details) values ('room');
-insert into customer(name, booking_id) values ('martin', 1);
+create table booking(
+    id serial primary key,
+    details varchar(255),
+    customer_id int references customer(id)
+);
+
+insert into customer(name) values ('martin');
+insert into booking(details, customer_id) values ('room',1);
 
 select * from booking
 select * from customer
+
 
 
 

@@ -20,7 +20,7 @@ select * from customer
 
 
 create table doctor(id serial primary key, name varchar(255));
-create table doctor(id serial primary key, name varchar(255));
+create table patient(id serial primary key, name varchar(255));
 create table cure(id serial primary key, doctor_id int references doctor(id), patiant_id int references patient(id));
 
 insert into doctor(name) values('martin');

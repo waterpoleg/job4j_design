@@ -39,5 +39,16 @@ left join transmission t on c.body_id = t.id;
 
 select e.name
 from engine e
-full join car c on e.id = c.engine_id
+left join car c
+on e.id = c.engine_id
 where c.id is null;
+
+select * from carbody
+left join car
+on carbody.id = car.body_id
+where car.body_id is null;
+
+select * from transmission t
+left join car c
+on t.id = c.transmission_id
+where c.transmission_id is null;

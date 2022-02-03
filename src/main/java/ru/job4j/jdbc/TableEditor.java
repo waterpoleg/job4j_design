@@ -1,7 +1,7 @@
 package ru.job4j.jdbc;
 
-import ru.job4j.io.Config;
-
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -17,11 +17,11 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void initConnection() throws ClassNotFoundException, SQLException {
-        Class.forName(properties.getProperty("driver"));
+        Class.forName(properties.getProperty("hibernate.connection.driver_class"));
         connection = DriverManager.getConnection(
-                properties.getProperty("url"),
-                properties.getProperty("login"),
-                properties.getProperty("password")
+                properties.getProperty("hibernate.connection.url"),
+                properties.getProperty("hibernate.connection.username"),
+                properties.getProperty("hibernate.connection.password")
         );
     }
 
@@ -82,18 +82,17 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
-        Config config = new Config("src/main/java/ru/job4j/io/data/app.properties");
-        config.load();
         Properties properties = new Properties();
-        properties.setProperty("driver", config.value("hibernate.connection.driver_class"));
-        properties.setProperty("url", config.value("hibernate.connection.url"));
-        properties.setProperty("login", config.value("hibernate.connection.username"));
-        properties.setProperty("password", config.value("hibernate.connection.password"));
-        TableEditor tableEditor = new TableEditor(properties);
-        tableEditor.createTable("Test");
-        tableEditor.addColumn("Test", "col", "varchar (255)");
-        tableEditor.renameColumn("Test", "col", "new_col");
-        tableEditor.dropColumn("Test", "new_col");
-        tableEditor.dropTable("Test");
+        try (FileInputStream in = new FileInputStream("src/main/java/ru/job4j/io/data/app.properties")) {
+            properties.load(in);
+            TableEditor tableEditor = new TableEditor(properties);
+            tableEditor.createTable("Test");
+            tableEditor.addColumn("Test", "col", "varchar (255)");
+            tableEditor.renameColumn("Test", "col", "new_col");
+            tableEditor.dropColumn("Test", "new_col");
+            tableEditor.dropTable("Test");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -23,12 +23,14 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(s -> {
-                String[] data = s.split(";", 2);
-                if (data[0].isEmpty() || data[1].isEmpty()) {
+                String[] data = s.split(";");
+                if (data.length != 2 || data[0].isEmpty()) {
                     throw new IllegalArgumentException("Invalid data format.");
                 }
                 users.add(new User(data[0], data[1]));
             });
+        } catch (Exception e) {
+            throw new IOException("Unable to load dump file", e);
         }
         return users;
     }

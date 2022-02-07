@@ -3,6 +3,7 @@ package ru.job4j.map;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleMap<K, V> implements Map<K, V> {
     private static final float LOAD_FACTOR = 0.75f;
@@ -49,7 +50,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public V get(K key) {
         var index = indexFor(hash(key.hashCode()));
-        return table[index] == null ? null : table[index].value;
+        V rsl = null;
+        if (table[index] != null) {
+            if (Objects.equals(table[index].key, key)) {
+                rsl = table[index].value;
+            }
+        }
+        return rsl;
     }
 
     @Override
@@ -68,7 +75,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         return new Iterator<K>() {
-            final MapEntry<K, V>[] oldTable = table;
             final int expectedModCount = modCount;
             private int point = 0;
 
@@ -77,16 +83,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                int pointNext = point;
-                boolean result = false;
-                while (pointNext < oldTable.length) {
-                    if (oldTable[pointNext++] != null) {
-                        result = true;
-                        point = pointNext - 1;
-                        break;
-                    }
+                while (point < capacity && table[point] == null) {
+                    point++;
                 }
-                return result;
+                return point < capacity;
             }
 
             @Override
@@ -94,7 +94,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return oldTable[point++].key;
+                return table[point++].key;
             }
         };
     }

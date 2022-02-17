@@ -35,4 +35,8 @@ from company c
 join person p
 on c.id = p.company_id
 group by c.name
-order by count(p.name) desc limit 1;
+having count(p.id) =
+(select count(p.id)
+from person p
+group by p.company_id
+order by count(p.name) desc limit 1)

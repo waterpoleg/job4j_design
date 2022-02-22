@@ -9,14 +9,14 @@ import java.util.Map;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class GeneratorTest extends TestCase {
+public class TemplateGeneratorTest extends TestCase {
 
     @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void whenManyKeys() {
         String template = "I am a ${name}, Who are ${subject}?";
         Map<String, String> map = Map.of("name", "Martin", "subject", "you", "age", "50");
-        Generator generator = new TemplateGenerator();
+        TemplateGenerator generator = new TemplateGenerator();
         generator.produce(template, map);
     }
 

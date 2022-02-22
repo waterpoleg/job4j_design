@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+import org.checkerframework.checker.units.qual.A;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -48,10 +50,12 @@ public class CinemaTest {
     @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void whenInvalidDate() {
-        Calendar date = Calendar.getInstance();
-        date.set(2020, 10, 10, 23, 00);
-        Calendar date2 = Calendar.getInstance();
-        date2.set(2020, 10, 10, 23, 00);
-        assertNotEquals(date, date2);
+        Calendar movieDate = Calendar.getInstance();
+        movieDate.set(2020, 10, 10, 23, 00);
+        Calendar ticketDate = Calendar.getInstance();
+        ticketDate.set(2020, 10, 10, 23, 30);
+        Cinema cinema = new Cinema3D();
+        Account account = new AccountCinema();
+        cinema.buy(account, 1, 1, ticketDate);
     }
 }

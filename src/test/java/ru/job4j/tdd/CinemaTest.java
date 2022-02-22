@@ -34,7 +34,7 @@ public class CinemaTest {
     }
 
     @Ignore
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenSoldOut() {
         Account account = new AccountCinema();
         Account anotherAccount = new AccountCinema();
@@ -46,7 +46,7 @@ public class CinemaTest {
     }
 
     @Ignore
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenInvalidDate() {
         Calendar date = Calendar.getInstance();
         date.set(2020, 10, 10, 23, 00);

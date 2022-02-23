@@ -1,6 +1,5 @@
 package ru.job4j.tdd.template;
 
-import junit.framework.TestCase;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class TemplateGeneratorTest extends TestCase {
+public class TemplateGeneratorTest {
 
     @Ignore
     @Test(expected = IllegalArgumentException.class)

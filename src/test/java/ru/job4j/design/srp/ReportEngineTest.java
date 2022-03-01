@@ -65,28 +65,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenDevsGenerated() {
-        MemStore store = new MemStore();
-        Calendar now = Calendar.getInstance();
-        Employee worker = new Employee("Ivan", now, now, 100);
-        store.add(worker);
-        Employee worker2 = new Employee("Ivan", now, now, 150);
-        store.add(worker2);
-        Report engine = new DevsReport(store);
-        StringBuilder expect = new StringBuilder()
-                .append("Name; Salary;")
-                .append(System.lineSeparator())
-                .append(worker2.getName()).append(";")
-                .append(worker2.getSalary()).append(";")
-                .append(System.lineSeparator())
-                .append(worker.getName()).append(";")
-                .append(worker.getSalary()).append(";")
-                .append(System.lineSeparator());
-        assertThat(engine.generate(em -> true), is(expect.toString()));
-    }
-
-    @Test
-    public void whenHtmlReport() {
+    public void whenHtmlDevsReport() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, null, 100);

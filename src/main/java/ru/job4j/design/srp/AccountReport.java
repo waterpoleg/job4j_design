@@ -4,10 +4,15 @@ import java.util.function.Predicate;
 
 public class AccountReport implements Report {
 
+    private final static double SALARY_RATE = 0.75;
     private Store store;
 
     public AccountReport(Store store) {
         this.store = store;
+    }
+
+    public double getSalaryRate() {
+        return SALARY_RATE;
     }
 
     @Override
@@ -18,7 +23,7 @@ public class AccountReport implements Report {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append("RUB").append(employee.getSalary()).append(";")
+                    .append(employee.getSalary() * SALARY_RATE).append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();

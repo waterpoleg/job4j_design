@@ -12,8 +12,16 @@ public class DevsReport implements Report {
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        StringBuilder text = new StringBuilder();
-        text.append("<table>")
+        StringBuilder html = new StringBuilder();
+        html.append("<!doctype html>\n")
+                .append("<html lang='en'>\n")
+                .append("<head>\n")
+                .append("<meta charset='utf-8'>\n")
+                .append("<title>Salary report</title>\n")
+                .append("</head>\n");
+        StringBuilder body = new StringBuilder();
+        body.append("<body>")
+                .append("<table>")
                 .append("<tr>")
                 .append("<th>Name</th>")
                 .append("<th>Hired</th>")
@@ -21,13 +29,14 @@ public class DevsReport implements Report {
                 .append("<th>Salary</th>")
                 .append("</tr>");
         for (Employee employee : store.findBy(filter)) {
-            text.append("<tr>")
+            body.append("<tr>")
                     .append("<td>").append(employee.getName()).append("</td>")
                     .append("<td>").append(employee.getHired()).append("</td>")
                     .append("<td>").append(employee.getFired()).append("</td>")
                     .append("<td>").append(employee.getSalary()).append("</td>")
                     .append("</tr>");
         }
-        return text.append("</table>").toString();
+        body.append("</table>").append("</body>");
+        return html.append(body).append("</html>").toString();
     }
 }

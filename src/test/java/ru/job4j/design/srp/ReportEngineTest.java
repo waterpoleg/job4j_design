@@ -31,14 +31,14 @@ public class ReportEngineTest {
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        Report engine = new AccountReport(store);
+        AccountReport engine = new AccountReport(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(";")
                 .append(worker.getHired()).append(";")
                 .append(worker.getFired()).append(";")
-                .append("RUB").append(worker.getSalary()).append(";")
+                .append(worker.getSalary() * engine.getSalaryRate()).append(";")
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
@@ -71,7 +71,15 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, null, 100);
         store.add(worker);
         Report engine = new DevsReport(store);
+        StringBuilder html = new StringBuilder();
+        html.append("<!doctype html>\n")
+                .append("<html lang='en'>\n")
+                .append("<head>\n")
+                .append("<meta charset='utf-8'>\n")
+                .append("<title>Salary report</title>\n")
+                .append("</head>\n");
         StringBuilder expected = new StringBuilder()
+                .append("<body>")
                 .append("<table>")
                 .append("<tr>")
                 .append("<th>Name</th>").append("<th>Hired</th>").append("<th>Fired</th>").append("<th>Salary</th>")
@@ -82,7 +90,8 @@ public class ReportEngineTest {
                 .append("<td>").append(worker.getFired()).append("</td>")
                 .append("<td>").append(worker.getSalary()).append("</td>")
                 .append("</tr>")
-                .append("</table>");
-        assertThat(engine.generate(em -> true), is(expected.toString()));
+                .append("</table>")
+                .append("</body>");
+        assertThat(engine.generate(em -> true), is(html.append(expected).append("</html>").toString()));
     }
 }

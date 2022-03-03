@@ -3,8 +3,6 @@ package ru.job4j.design.srp;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -106,15 +104,57 @@ public class ReportEngineTest {
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        Employee worker2 = new Employee("Evan", now, now, 150);
-        store.add(worker2);
         Report engine = new JSONReport(store);
-        Gson gson = new GsonBuilder().create();
         StringBuilder expect = new StringBuilder()
                 .append("[")
-                .append(gson.toJson(worker))
+                .append("{")
+                .append("\"name\":")
+                .append("\"")
+                .append(worker.getName())
+                .append("\",")
+                .append("\"hired\":")
+                .append("{")
+                .append("\"year\":")
+                .append(worker.getHired().get(Calendar.YEAR))
                 .append(",")
-                .append(gson.toJson(worker2))
+                .append("\"month\":")
+                .append(worker.getHired().get(Calendar.MONTH))
+                .append(",")
+                .append("\"dayOfMonth\":")
+                .append(worker.getHired().get(Calendar.DAY_OF_MONTH))
+                .append(",")
+                .append("\"hourOfDay\":")
+                .append(worker.getHired().get(Calendar.HOUR_OF_DAY))
+                .append(",")
+                .append("\"minute\":")
+                .append(worker.getHired().get(Calendar.MINUTE))
+                .append(",")
+                .append("\"second\":")
+                .append(worker.getHired().get(Calendar.SECOND))
+                .append("},")
+                .append("\"fired\":")
+                .append("{")
+                .append("\"year\":")
+                .append(worker.getHired().get(Calendar.YEAR))
+                .append(",")
+                .append("\"month\":")
+                .append(worker.getHired().get(Calendar.MONTH))
+                .append(",")
+                .append("\"dayOfMonth\":")
+                .append(worker.getHired().get(Calendar.DAY_OF_MONTH))
+                .append(",")
+                .append("\"hourOfDay\":")
+                .append(worker.getHired().get(Calendar.HOUR_OF_DAY))
+                .append(",")
+                .append("\"minute\":")
+                .append(worker.getHired().get(Calendar.MINUTE))
+                .append(",")
+                .append("\"second\":")
+                .append(worker.getHired().get(Calendar.SECOND))
+                .append("},")
+                .append("\"salary\":")
+                .append(worker.getSalary())
+                .append("}")
                 .append("]");
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
@@ -123,7 +163,7 @@ public class ReportEngineTest {
     public void whenXMLGenerated() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+03:00");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         String dateFormatted = dateFormat.format(now.getTime());
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);

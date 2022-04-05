@@ -12,5 +12,4 @@
 Ввод-вывод, Socket
 SQl, JDBC
 
-# change
-# new changes
+# stash test

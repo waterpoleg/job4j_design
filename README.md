@@ -12,3 +12,8 @@
 Ввод-вывод, Socket
 SQl, JDBC
 Git
+1
+2
+3
+4
+

@@ -13,3 +13,5 @@
 SQl, JDBC
 
 # stash test
+# changes from task_125032
+

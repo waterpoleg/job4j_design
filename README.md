@@ -15,3 +15,5 @@ SQl, JDBC
 # stash test
 # changes from branch hotfix
 
+# changes from task_125032
+

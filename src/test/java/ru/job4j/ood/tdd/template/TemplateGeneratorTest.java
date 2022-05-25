@@ -1,4 +1,4 @@
-package ru.job4j.tdd.template;
+package ru.job4j.ood.tdd.template;
 
 import org.junit.Ignore;
 import org.junit.Test;

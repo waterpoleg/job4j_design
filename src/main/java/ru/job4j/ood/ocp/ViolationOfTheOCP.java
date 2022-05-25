@@ -1,4 +1,4 @@
-package ru.job4j.design.ocp;
+package ru.job4j.ood.ocp;
 
 public class ViolationOfTheOCP {
 

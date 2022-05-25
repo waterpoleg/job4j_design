@@ -1,5 +1,10 @@
 package ru.job4j.tdd;
 
+import ru.job4j.ood.tdd.Account;
+import ru.job4j.ood.tdd.Cinema;
+import ru.job4j.ood.tdd.Session;
+import ru.job4j.ood.tdd.Ticket;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;

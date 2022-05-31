@@ -4,11 +4,11 @@ package ru.job4j.ood.lsp;
 * Нарушение LSP: в наследнике ослабляется постусловие, нет расчета скидки
 * */
 
-public class Shop {
+public class OldShop {
 
     private int sum;
 
-    public Shop(int sum) {
+    public OldShop(int sum) {
         this.sum = sum;
     }
 
@@ -24,7 +24,7 @@ public class Shop {
     }
 }
 
-class Boutique extends Shop {
+class Boutique extends OldShop {
 
     public Boutique(int sum) {
         super(sum);

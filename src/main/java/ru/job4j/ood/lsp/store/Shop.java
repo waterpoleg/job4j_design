@@ -3,9 +3,11 @@ package ru.job4j.ood.lsp.store;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.job4j.ood.lsp.store.Constants.*;
+
 public class Shop implements Store {
 
-    private List<Food> foods;
+    private List<Food> foods = new ArrayList<>();
 
     @Override
     public List<Food> getAll() {
@@ -16,9 +18,9 @@ public class Shop implements Store {
     public boolean add(Food food) {
         var result = false;
         var freshness = freshnessRatio(food);
-        if (freshness >= HIGH_FRESHNESS_RATIO && freshness <= LOW_FRESHNESS_RATIO) {
-            if (freshness >= MEDIUM_FRESHNESS_RATIO) {
-                food.setDiscount(DISCOUNT);
+        if (freshness >= HIGH_FRESHNESS_RATIO.getValue() && freshness <= LOW_FRESHNESS_RATIO.getValue()) {
+            if (freshness >= MEDIUM_FRESHNESS_RATIO.getValue()) {
+                food.setDiscount(DISCOUNT.getValue());
             }
             foods.add(food);
             result = true;
@@ -28,6 +30,6 @@ public class Shop implements Store {
 
     @Override
     public void clearStorage() {
-        foods = new ArrayList<>();
+        foods.clear();
     }
 }

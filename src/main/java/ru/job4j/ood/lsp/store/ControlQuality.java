@@ -12,12 +12,15 @@ public class ControlQuality {
     }
 
     public void distributeFood(Food food) {
-        stores.forEach(store -> {
-            var result = store.add(food);
-            if (!result) {
-                System.out.println("There is no store for such kind of food: " + food);
+        var result = false;
+        for (Store store : stores) {
+            if (store.add(food)) {
+                result = true;
             }
-        });
+        }
+        if (!result) {
+            System.out.println("There is no store for such kind of food: " + food);
+        }
     }
 
     public void resort() {

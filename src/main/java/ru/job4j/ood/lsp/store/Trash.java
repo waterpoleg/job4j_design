@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Trash implements Store {
 
-    private List<Food> foods;
+    private List<Food> foods = new ArrayList<>();
 
     @Override
     public List<Food> getAll() {
@@ -15,7 +15,7 @@ public class Trash implements Store {
     @Override
     public boolean add(Food food) {
         var result = false;
-        if (freshnessRatio(food) > LOW_FRESHNESS_RATIO) {
+        if (freshnessRatio(food) > Constants.LOW_FRESHNESS_RATIO.getValue()) {
             foods.add(food);
             result = true;
         }
@@ -24,6 +24,6 @@ public class Trash implements Store {
 
     @Override
     public void clearStorage() {
-        foods = new ArrayList<>();
+        foods.clear();
     }
 }
